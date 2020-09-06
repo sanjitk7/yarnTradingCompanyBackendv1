@@ -26,14 +26,14 @@ const router = express.Router()
 router.post("/", auth, async (req, res) => {
     
     try {
-        const buffer = await sharp(req.file.buffer).png().toBuffer()
+        // const buffer = await sharp(req.file.buffer).png().toBuffer()
         
-        const product = new Product(req.body)
-
-        // const product = new Product({
-        //     ...req.body,
-        //     pPicture: buffer
-        // })
+        // const product = new Product(req.body)
+        // console.log(req.body)
+        const product = new Product({
+            ...req.body,
+            pPictureURL: "http://127.0.0.1:4000/img/" + req.body["pPictureCode"].toString() + ".jpg"
+        })
 
         await product.save()
         res.status(201).send(product)
@@ -133,23 +133,23 @@ router.delete("/:code", auth, async (req,res) => {
 })
 
 
-// GET picture
-router.get("/picture/:code", async (req,res) => {
-    try{
+// // GET picture
+// router.get("/picture/:code", async (req,res) => {
+//     try{
 
-        const product = await Product.findOne({pCode: req.params.code})
+//         const product = await Product.findOne({pCode: req.params.code})
 
-        if(!product || !product.pPicture) {
-            throw new Error("Product or Picture doesn't exist")
-        }
+//         if(!product || !product.pPicture) {
+//             throw new Error("Product or Picture doesn't exist")
+//         }
 
-        res.set("Content-Type","image/png")
+//         res.set("Content-Type","image/png")
 
-        res.send(product.pPicture)
-    } catch (e) {
-        console.log(e)
-        res.status(404).send(e)
-    }
-})
+//         res.send(product.pPicture)
+//     } catch (e) {
+//         console.log(e)
+//         res.status(404).send(e)
+//     }
+// })
 
 module.exports = router

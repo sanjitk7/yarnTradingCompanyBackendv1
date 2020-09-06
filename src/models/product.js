@@ -55,6 +55,13 @@ const productSchema = mongoose.Schema({
     },
     pPicture: {
         type: Buffer
+    },
+    pPictureCode:{
+        type:Number,
+        required: true
+    },
+    pPictureURL:{
+        type:String
     }
 
 },{
