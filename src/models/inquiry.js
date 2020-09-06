@@ -31,6 +31,10 @@ const inquirySchema = mongoose.Schema({
         type: String,
         required: true
     },
+    organisationAddr: {
+        type: String,
+        required: true
+    },
     estPuchaseSize: {
         type: Number,
         required: true,

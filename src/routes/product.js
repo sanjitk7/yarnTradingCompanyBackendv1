@@ -1,17 +1,42 @@
 const express = require('express');
+const multer = require('multer');
+const sharp = require('sharp');
 const Product = require('../models/product.js')
 const auth = require("../middleware/auth")
 
 const router = express.Router()
+
+
+const upload = multer({
+    limits: {
+        fileSize: 5000000
+    },
+    fileFilter(req,file,cb) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png|JPG|PNG|JPEG)$/)) {
+            return cb(new Error("Upload Proper File"))
+        }
+        cb(undefined,true)
+    }
+})
+
+
 //CRUD Operations for Products by Employees
 
 //Create Products
-router.post("/", auth, async (req, res) => {
-    const product = new Product(req.body)
+router.post("/", auth, upload.single("pPicture"), async (req, res) => {
+    
     try {
+        const buffer = await sharp(req.file.buffer).png().toBuffer()
+        
+        const product = new Product({
+            ...req.body,
+            pPicture: buffer
+        })
+
         await product.save()
         res.status(201).send(product)
     } catch (e) {
+        console.log(e)
         res.status(400).send()
     }
 })
@@ -20,7 +45,7 @@ router.post("/", auth, async (req, res) => {
 // GET /tasks?limit=2&skip=2
 // GET /tasks?sortBy=createdAt:asc
 //View All Products
-router.get("/", auth, async (req,res) => {
+router.get("/summary", auth, async (req,res) => {
 
     const match = {}
     const sort = {}
@@ -104,4 +129,25 @@ router.delete("/:code", auth, async (req,res) => {
         res.status(500).send()
     }
 })
+
+
+// GET picture
+router.get("/picture/:code", async (req,res) => {
+    try{
+
+        const product = await Product.findOne({pCode: req.params.code})
+
+        if(!product || !product.pPicture) {
+            throw new Error("Product or Picture doesn't exist")
+        }
+
+        res.set("Content-Type","image/png")
+
+        res.send(product.pPicture)
+    } catch (e) {
+        console.log(e)
+        res.status(404).send(e)
+    }
+})
+
 module.exports = router

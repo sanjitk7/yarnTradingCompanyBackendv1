@@ -41,6 +41,15 @@ const productSchema = mongoose.Schema({
             }
         }
     },
+    pQty:{
+        type: Number,
+        trim: true,
+        validate(value){
+            if (value<0){
+                throw new Error("Quantity cannot be negetive")
+            }
+        }
+    },
     pPicture: {
         type: Buffer
     }
@@ -58,6 +67,18 @@ const productSchema = mongoose.Schema({
 //   ItemSchema.path('pPriceEst').set(function(num) {
 //     return num * 100;
 //   });
+
+// return article without picture when asked
+
+productSchema.methods.toJSON = function () {
+    const product = this
+    const productObject = product.toObject()
+
+    delete productObject.pPicture
+
+    return productObject
+
+}
 
 const Product = mongoose.model("Product", productSchema);
 
