@@ -7,31 +7,33 @@ const auth = require("../middleware/auth")
 const router = express.Router()
 
 
-const upload = multer({
-    limits: {
-        fileSize: 5000000
-    },
-    fileFilter(req,file,cb) {
-        if (!file.originalname.match(/\.(jpg|jpeg|png|JPG|PNG|JPEG)$/)) {
-            return cb(new Error("Upload Proper File"))
-        }
-        cb(undefined,true)
-    }
-})
+// const upload = multer({
+//     limits: {
+//         fileSize: 5000000
+//     },
+//     fileFilter(req,file,cb) {
+//         if (!file.originalname.match(/\.(jpg|jpeg|png|JPG|PNG|JPEG)$/)) {
+//             return cb(new Error("Upload Proper File"))
+//         }
+//         cb(undefined,true)
+//     }
+// })
 
 
 //CRUD Operations for Products by Employees
 
 //Create Products
-router.post("/", auth, upload.single("pPicture"), async (req, res) => {
+router.post("/", auth, async (req, res) => {
     
     try {
         const buffer = await sharp(req.file.buffer).png().toBuffer()
         
-        const product = new Product({
-            ...req.body,
-            pPicture: buffer
-        })
+        const product = new Product(req.body)
+
+        // const product = new Product({
+        //     ...req.body,
+        //     pPicture: buffer
+        // })
 
         await product.save()
         res.status(201).send(product)

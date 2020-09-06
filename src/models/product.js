@@ -30,11 +30,13 @@ const productSchema = mongoose.Schema({
         default: true
     },
     pPriceEst :{
-        type: Number
+        type: Number,
+        default: 0
     },
     pDesc: {
         type: String,
         trim: true,
+        required: true,
         validate(value){
             if (value.length>3000){
                 throw new Error("Product Description is too long")
@@ -44,6 +46,7 @@ const productSchema = mongoose.Schema({
     pQty:{
         type: Number,
         trim: true,
+        required: true,
         validate(value){
             if (value<0){
                 throw new Error("Quantity cannot be negetive")
