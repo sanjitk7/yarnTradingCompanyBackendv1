@@ -34,6 +34,7 @@ router.post("/login", async (req,res) => {
         // console.log(userFound)
         const token = await userFound.generateToken()
         // console.log(token)
+        res.cookie('token', token, { httpOnly: true });
         res.send({userFound,token})
 
     } catch (e) {
