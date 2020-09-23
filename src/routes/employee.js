@@ -1,8 +1,11 @@
 const express = require('express')
+const bodyParser = require('body-parser')
 
 const Employee = require("../models/employee.js")
 const auth = require("../middleware/auth.js")
 const router = express.Router()
+
+const urlencodedParser = bodyParser.urlencoded({ extended:false})
 
 router.get("/",(req,res) =>{
     res.send("Test")
@@ -16,8 +19,6 @@ router.post("/create-employee", async (req,res) => {
         // console.log(req.body)
         // console.log("Register Route")       
         await newUser.save()
-        const token = await newUser.generateToken()
-
 
         res.status(201).send({newUser,token})
     } catch (e) {
@@ -27,7 +28,7 @@ router.post("/create-employee", async (req,res) => {
 })
 
 //Login
-router.post("/login", async (req,res) => {
+router.post("/login", urlencodedParser,async (req,res) => {
     try{
         // console.log("befoe")
         const userFound = await Employee.findByCredentials(req.body.email, req.body.password)
@@ -38,6 +39,7 @@ router.post("/login", async (req,res) => {
 
     } catch (e) {
         console.log(e)
+        console.log("req.body: ",req.body)
         res.status(400).send(e)
     }
 })
