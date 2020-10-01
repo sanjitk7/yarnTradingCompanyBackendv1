@@ -3,12 +3,14 @@ require("./db/mongo")
 const express = require("express")
 const hbs = require("hbs")
 const path = require("path")
+const cors = require("cors")
 
 const employeeRouter = require("./routes/employee.js")
 const productsRouter = require("./routes/product.js")
 const inquiryRouter = require("./routes/inquiry.js")
 
 const app = express()
+app.use(cors())
 const port = process.env.PORT || 3000
 
 
