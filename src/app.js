@@ -11,8 +11,6 @@ const inquiryRouter = require("./routes/inquiry.js")
 
 const app = express()
 app.use(cors())
-const port = process.env.PORT || 3000
-
 
 // For templates - Testing
 const publicPath = path.join(__dirname, "../public")
@@ -29,8 +27,5 @@ app.use("/employee",employeeRouter)
 app.use("/products",productsRouter)
 app.use("/inquiry",inquiryRouter)
 
+module.exports = app
 
-
-app.listen(port, ()=>{
-    console.log("Listening on "+port)
-})

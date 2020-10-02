@@ -77,7 +77,7 @@ employeeSchema.methods.toJSON = function () {
 
 employeeSchema.methods.generateToken = async function () {
     const findUser = this
-    const token = jwt.sign({ _id:findUser._id.toString() }, process.env.JWT_SECRET)
+    const token = jwt.sign({ _id:findUser._id.toString(), isAdmin:findUser.isAdmin.toString() }, process.env.JWT_SECRET)
     
     // console.log(findUser)
     findUser.tokens = findUser.tokens.concat({ token })

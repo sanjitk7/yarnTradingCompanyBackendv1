@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const sharp = require('sharp');
 const Product = require('../models/product.js')
-const auth = require("../middleware/auth")
+const {auth, adminAuth} = require("../middleware/auth")
 
 const router = express.Router()
 

@@ -26,4 +26,21 @@ const auth = async function (req,res,next) {
     }
 }
 
-module.exports = auth
+const adminAuth = function (req,res,next){
+    try{
+        const token = req.header("Authorization").replace("Bearer ","")
+        const decoded = jwt.verify(token,process.env.JWT_SECRET)
+        // console.log("from Admin Auth: isAdmin: ",decoded.isAdmin)
+        if(decoded.isAdmin ==="false"){
+            throw new Error()
+        }
+        next() 
+    } catch(e){
+        res.status(401).send("You do not have admin privilege.")
+    }
+}
+
+module.exports = {
+    auth,
+    adminAuth
+}

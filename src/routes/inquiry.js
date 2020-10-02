@@ -1,6 +1,6 @@
 const express = require('express')
 const Inquiry = require('../models/inquiry.js')
-const auth = require("../middleware/auth.js")
+const {auth, adminAuth} = require("../middleware/auth.js")
 
 const router = express.Router()
 
@@ -8,7 +8,7 @@ const router = express.Router()
 
 //Create Inquiry
 
-router.post("/", auth, async (req, res) => {
+router.post("/", async (req, res) => {
     const inquiry = new Inquiry(req.body)
     try {
         await inquiry.save()

@@ -4,9 +4,12 @@
   "description": "Application for Textile Trading Company",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node src/app",
-    "dev": "env-cmd -f ./config/dev.env nodemon src/app.js"
+    "test": "env-cmd -f ./config/test.env jest --watch --runInBand",
+    "start": "node src/index",
+    "dev": "env-cmd -f ./config/dev.env nodemon src/index.js"
+  },
+  "jest": {
+    "testEnvironment": "node"
   },
   "keywords": [
     "textile"
@@ -20,6 +23,7 @@
     "env-cmd": "^10.1.0",
     "express": "^4.17.1",
     "hbs": "^4.1.1",
+    "jest": "^26.4.2",
     "jsonwebtoken": "^8.5.1",
     "mongoose": "^5.10.2",
     "multer": "^1.4.2",
@@ -28,6 +32,7 @@
     "validator": "^13.1.1"
   },
   "devDependencies": {
-    "nodemon": "^2.0.4"
+    "nodemon": "^2.0.4",
+    "supertest": "^5.0.0"
   }
 }
