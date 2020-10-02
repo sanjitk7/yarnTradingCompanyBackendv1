@@ -24,3 +24,27 @@ test("create inquiry", async ()=> {
     const foundInquiry = await Inquiry.findById(response.body._id)
     expect(foundInquiry).not.toBeNull()
 })
+
+
+test("list all inquiries", async ()=> {
+    const response = await request(app)
+    .get("/inquiry")
+    .set("Authorization", `Bearer ${employeeOne.tokens[0].token}`)
+    .send()
+    .expect(200)
+
+    expect(response.body.length).toEqual(2)
+
+})
+
+test("Delete inquiries", async ()=> {
+    const response = await request(app)
+    .delete(`/inquiry/${inquiryOne._id}`)
+    .set("Authorization", `Bearer ${employeeOne.tokens[0].token}`)
+    .send()
+    .expect(200)
+
+    const foundInquiry = await Inquiry.findById(response.body._id)
+    expect(foundInquiry).toBeNull()
+
+})

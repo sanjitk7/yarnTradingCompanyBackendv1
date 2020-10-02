@@ -57,14 +57,6 @@ test("Should get profile for user", async () => {
         .expect(200)
 })
 
-test("Should get profile for user", async () => {
-    await request(app)
-        .get('/employee/me')
-        .set('Authorization', `Bearer ${employeeOne.tokens[0].token}`)
-        .send()
-        .expect(200)
-})
-
 test("Should not get profile for invalid token", async () => {
     const invalidToken = "hbraehbfahsbg"
     await request(app)
