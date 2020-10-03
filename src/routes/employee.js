@@ -36,7 +36,6 @@ router.post("/login", urlencodedParser,async (req,res) => {
         // console.log(userFound)
         const token = await userFound.generateToken()
         // console.log(token)
-        res.cookie('token', token, { httpOnly: true });
         res.send({userFound,token})
 
     } catch (e) {
@@ -81,12 +80,13 @@ router.get("/me", auth, async (req,res) => {
 
 router.delete("/:id", auth, adminAuth, async (req,res) => {
     try {
-        const deletedUser = await Product.findOneAndDelete({_id:req.params.id})
+        const deletedUser = await Employee.findOneAndDelete({_id:req.params.id})
         if (!deletedUser){
             return res.status(404).send()
         }
         res.send(deletedUser)
     } catch (e) {
+        console.log(e)
         res.status(500).send(e)
     }
 })

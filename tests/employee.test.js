@@ -66,22 +66,22 @@ test("Should not get profile for invalid token", async () => {
         .expect(401)
 })
 
-// test("Should delete employee only by admin", async () => {
-//     await request(app)
-//         .delete(`/employee/${employeeOneId}`)
-//         .set('Authorization', `Bearer ${employeeTwo.tokens[0].token}`)
-//         .send()
-//         .expect(200)
-//     const foundEmployee = await Employee.findById(employeeOneId)
-//     expect(foundEmployee).toBeNull()
-// })
+test("Should delete employee only by admin", async () => {
+    await request(app)
+        .delete(`/employee/${employeeOneId}`)
+        .set('Authorization', `Bearer ${employeeTwo.tokens[0].token}`)
+        .send()
+        .expect(200)
+    const foundEmployee = await Employee.findById(employeeOneId)
+    expect(foundEmployee).toBeNull()
+})
 
-// test("Should not delete user for invalid auth", async () => {
-//     const invalidToken = "hbraehbfahsbg"
-//     await request(app)
-//         .delete('/users/me')
-//         .set('Authorization', `Bearer ${invalidToken}`)
-//         .send()
-//         .expect(401)
-// })
+test("Should not delete user for invalid auth", async () => {
+    const invalidToken = "hbraehbfahsbg"
+    await request(app)
+        .delete('/users/me')
+        .set('Authorization', `Bearer ${invalidToken}`)
+        .send()
+        .expect(401)
+})
 

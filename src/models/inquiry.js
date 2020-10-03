@@ -44,6 +44,19 @@ const inquirySchema = mongoose.Schema({
             }
         }
     },
+    // Could replace type with mongoose.Schema.Types.ObjectId ( for virtual connection of the 2 collections)
+    // But pCode is used instead of _id
+    productsInq: [{
+        productId:{
+            type:String,
+            required:true,
+            validate(value){
+                if (value.length>4 || value.length===0 || !validator.isAlphanumeric(value)){
+                    throw new Error("Invalid Product Code")
+                }
+            }
+        }
+    }],
     remark: {
         type: String,
         validate(value){

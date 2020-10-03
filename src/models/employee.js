@@ -91,7 +91,7 @@ employeeSchema.methods.generateToken = async function () {
 
 employeeSchema.statics.findByCredentials = async (email, password) => {
     const findUser = await Employee.findOne({ email })
-    // console.log(findUser)
+    console.log(findUser)
     if(!findUser) {
         throw new Error ("Unable to Login!")
     }
