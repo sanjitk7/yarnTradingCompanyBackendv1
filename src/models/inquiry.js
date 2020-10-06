@@ -35,7 +35,7 @@ const inquirySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    estPuchaseSize: {
+    estPurchaseSize: {
         type: Number,
         required: true,
         validate(value){
