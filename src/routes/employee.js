@@ -73,7 +73,12 @@ router.post("/logout-all", auth, async (req,res) => {
 // Read user
 
 router.get("/me", auth, async (req,res) => {
+    try{
     res.send(req.user)
+    } catch (e){
+        console.log(e)
+        res.send(404)
+    }
 })
 
 // Delete Employee
