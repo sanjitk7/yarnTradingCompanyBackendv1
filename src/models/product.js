@@ -58,7 +58,7 @@ const productSchema = mongoose.Schema({
     },
     pPictureCode:{
         type:Number,
-        required: true
+        required: false
     },
     pPictureURL:{
         type:String

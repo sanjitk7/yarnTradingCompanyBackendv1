@@ -7,32 +7,33 @@ const {auth, adminAuth} = require("../middleware/auth")
 const router = express.Router()
 
 
-// const upload = multer({
-//     limits: {
-//         fileSize: 5000000
-//     },
-//     fileFilter(req,file,cb) {
-//         if (!file.originalname.match(/\.(jpg|jpeg|png|JPG|PNG|JPEG)$/)) {
-//             return cb(new Error("Upload Proper File"))
-//         }
-//         cb(undefined,true)
-//     }
-// })
+const upload = multer({
+    limits: {
+        fileSize: 5000000
+    },
+    fileFilter(req,file,cb) {
+        if (!file.originalname.match(/\.(jpg|jpeg|png|JPG|PNG|JPEG)$/)) {
+            return cb(new Error("Upload Proper File"))
+        }
+        cb(undefined,true)
+    }
+})
 
 
 //CRUD Operations for Products by Employees
 
 //Create Products
-router.post("/", auth, async (req, res) => {
+router.post("/", auth, upload.single("pPicture"), async (req, res) => {
     
     try {
-        // const buffer = await sharp(req.file.buffer).png().toBuffer()
+        const buffer = await sharp(req.file.buffer).png().toBuffer()
         
         // const product = new Product(req.body)
-        // console.log(req.body)
+        console.log(req.body)
         const product = new Product({
             ...req.body,
-            pPictureURL: "http://127.0.0.1:4000/img/" + req.body["pPictureCode"].toString() + ".jpg"
+            pPicture: buffer,
+            pPictureURL: "http://127.0.0.1:4000/products/picture/" + req.body.pCode
         })
 
         await product.save()
@@ -47,7 +48,7 @@ router.post("/", auth, async (req, res) => {
 // GET /tasks?limit=2&skip=2
 // GET /tasks?sortBy=createdAt:asc
 //View All Products
-router.get("/summary", auth, async (req,res) => {
+router.get("/summary", async (req,res) => {
 
     const match = {}
     const sort = {}
@@ -65,9 +66,9 @@ router.get("/summary", auth, async (req,res) => {
 
         const allProducts = await Product.find(match)
 
-        if (!req.user){
-            return res.status(404).send()
-        }
+        // if (!req.user){
+        //     return res.status(404).send()
+        // }
         res.send(allProducts)
     } catch (e) {
         console.log(e)
@@ -133,23 +134,23 @@ router.delete("/:code", auth, async (req,res) => {
 })
 
 
-// // GET picture
-// router.get("/picture/:code", async (req,res) => {
-//     try{
+// GET picture
+router.get("/picture/:code", async (req,res) => {
+    try{
 
-//         const product = await Product.findOne({pCode: req.params.code})
+        const product = await Product.findOne({pCode: req.params.code})
 
-//         if(!product || !product.pPicture) {
-//             throw new Error("Product or Picture doesn't exist")
-//         }
+        if(!product || !product.pPicture) {
+            throw new Error("Product or Picture doesn't exist")
+        }
 
-//         res.set("Content-Type","image/png")
+        res.set("Content-Type","image/png")
 
-//         res.send(product.pPicture)
-//     } catch (e) {
-//         console.log(e)
-//         res.status(404).send(e)
-//     }
-// })
+        res.send(product.pPicture)
+    } catch (e) {
+        console.log(e)
+        res.status(404).send(e)
+    }
+})
 
 module.exports = router
