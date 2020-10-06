@@ -4,6 +4,10 @@ An Inventory Management and Business Intelligence Web Application for a typical 
 
 *Node Express MongoDB Backend*
 
+### DataModel/ER Diagram
+
+![er](./public/img/backend-er.png)
+
 ### API Documentation
 
 ### Status Codes
@@ -118,4 +122,5 @@ An Inventory Management and Business Intelligence Web Application for a typical 
 
 ### Deployment
 
-Heroku - 
+Backend Server Deployed in a [Heroku Server](https://sanjit-yarn-trading-backend.herokuapp.com) and Mongo Atlas Cluster.
+Find front end repository [here](https://github.com/sanjitk7/yarnTradingCompanyFrontendv1)
