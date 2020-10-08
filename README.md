@@ -8,6 +8,10 @@ An Inventory Management and Business Intelligence Web Application for a typical 
 
 ![er](./public/img/backend-er.png)
 
+### Backend API
+
+![api-flow](./public/img/backend-api.png)
+
 ### API Documentation
 
 ### Status Codes
