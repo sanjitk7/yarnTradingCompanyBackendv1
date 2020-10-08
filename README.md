@@ -119,6 +119,16 @@ An Inventory Management and Business Intelligence Web Application for a typical 
    1. Success - 200, deletedInquiry
    2. Failure - 500
 
+4. All Products in Given Inquiry - GET */inquiry/:id/list-products*
+   1. req.params.id - inquiry id
+   2. Success - 200, list of products
+   3. Failure - 500
+
+5. All Inquires for given product - GET */inquiry/:id/list-inquires*
+   1. req.params.id - inquiry id
+   2. Success - 200, list of inquires
+   3. Failure - 500
+
 
 ### Deployment
 
