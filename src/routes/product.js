@@ -78,7 +78,7 @@ router.get("/summary", async (req,res) => {
 
 //View Product with ProductID
 
-router.get("/:code",auth, async (req,res) => {
+router.get("/:code", async (req,res) => {
     const pid = req.params.code
 
     try {
@@ -107,7 +107,7 @@ router.patch("/:code", auth, async (req,res) => {
         const foundProduct = await Product.findOne({pCode: req.params.code})
         updateFieldsReq.forEach((updateField) => foundProduct[updateField] = req.body[updateField])
 
-        // const updatedTask = await Task.findByIdAndUpdate(req.params.id,req.body,{ new: true, runValidators: true})
+        // const updatedTask = await Product.findByIdAndUpdate(req.params.id,req.body,{ new: true, runValidators: true})
         if (!foundProduct){
             return res.status(404).send()
         }

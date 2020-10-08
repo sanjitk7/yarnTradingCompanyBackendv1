@@ -90,6 +90,15 @@ productSchema.methods.toJSON = function () {
 
 }
 
+
+// create a virtual reverse relationship bw user-> task : Established a connection/relationship/mapping like in SQLDBs
+
+productSchema.virtual( "inq", {  
+    ref: "Inquiry",
+    localField: "_id",
+    foreignField : "productsInq"
+})
+
 const Product = mongoose.model("Product", productSchema);
 
 module.exports = Product;

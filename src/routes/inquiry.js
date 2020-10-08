@@ -1,5 +1,6 @@
 const express = require('express')
 const Inquiry = require('../models/inquiry.js')
+const Product = require('../models/product')
 const {auth, adminAuth} = require("../middleware/auth.js")
 
 const router = express.Router()
@@ -21,14 +22,14 @@ router.post("/", async (req, res) => {
 
 //List all inquiries
 
-router.get("/", auth, async (req,res) => {
+router.get("/", auth, adminAuth, async (req,res) => {
 
     try {
 
         const allInquiries = await Inquiry.find({})
 
         if (!req.user){
-            return res.status(404).send()
+            return res.status(404).send("Nothing")
         }
         res.send(allInquiries)
     } catch (e) {
@@ -50,5 +51,32 @@ router.delete("/:id", auth, async (req,res) => {
     }
 })
 
+// List all products this inquiry inquires about
+router.get("/:id/list-products", auth,adminAuth, async (req,res)=>{
+    try {
+        // console.log("hello")
+        
+        const foundInquiry = await Inquiry.findById(req.params.id)
+        listOfProducts = []
+        await foundInquiry.populate("productsInq").execPopulate()
+        console.log(foundInquiry)
+        res.send(foundInquiry)
+    } catch (e) {
+        console.log(e)
+        res.status(400).send({error:e})
+    }
+})
 
+// List all inquires this product has received
+router.get("/:id/list-inquires",auth, adminAuth, async (req,res)=>{
+    try {
+        foundProduct = await Product.findById(req.params.id)
+        foundProduct.populate("")
+        .execPopulate()
+        console.log(foundProduct)
+        res.send(foundProduct)
+    } catch (e) {
+        console.log(e)
+    }
+})
 module.exports = router
