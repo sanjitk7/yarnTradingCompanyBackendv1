@@ -9,10 +9,11 @@ const employeeRouter = require("./routes/employee.js")
 const productsRouter = require("./routes/product.js")
 const inquiryRouter = require("./routes/inquiry.js")
 
+// Disabling Cross Origin Resource sharing policy to enable frontend use
 const app = express()
 app.use(cors())
 
-// For templates - Testing
+// For templates - Testing initial routes - actual frontend will be with reactJS
 const publicPath = path.join(__dirname, "../public")
 const viewPath = path.join(__dirname, "../templates/views")
 const partialsPath = path.join(__dirname, "../templates/partials")

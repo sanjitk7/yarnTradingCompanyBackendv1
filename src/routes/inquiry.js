@@ -72,7 +72,7 @@ router.get("/:id/list-inquires",auth, adminAuth, async (req,res)=>{
     try {
         productId = req.params.id
         let eachInquiryProducts = undefined
-        productInquiries = [] // the inquries recieved about the given product (product id in params)
+        productInquiries = [] // the inquires received about the given product (product id in params)
         const allInquiries = await Inquiry.find({})
         for (let i=0;i<allInquiries.length;i++) {
             eachInquiryProducts = allInquiries[i].productsInq

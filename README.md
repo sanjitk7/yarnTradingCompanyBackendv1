@@ -66,7 +66,7 @@ An Inventory Management and Business Intelligence Web Application for a typical 
     2. On Success - 200, product with pPictureURL attribute which contains corresponding picture get url
     3. On Failure - 400
 
-2. Get All Products - GET */tasks/summary*, GET */tasks?availability=true*, GET */tasks?limit=2&skip=2*, GET */tasks?sortBy=createdAt:asc*
+2. Get All Products - GET */products/summary*, GET */products?availability=true*, GET */products?limit=2&skip=2*, GET */products?sortBy=createdAt:asc*
    1. Optional queries
       1. availability=true - returns only products with availability attribute as true
       2. limit - limits returned products to given number

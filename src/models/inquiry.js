@@ -44,8 +44,6 @@ const inquirySchema = mongoose.Schema({
             }
         }
     },
-    // Could replace type with mongoose.Schema.Types.ObjectId ( for virtual connection of the 2 collections)
-    // But pCode is used instead of _id
     productsInq: [
         {
             type:mongoose.Schema.Types.ObjectId,

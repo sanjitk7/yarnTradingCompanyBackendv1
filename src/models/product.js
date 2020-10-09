@@ -78,7 +78,7 @@ const productSchema = mongoose.Schema({
 //     return num * 100;
 //   });
 
-// return article without picture when asked
+// return product without picture when listing
 
 productSchema.methods.toJSON = function () {
     const product = this
@@ -91,7 +91,7 @@ productSchema.methods.toJSON = function () {
 }
 
 
-// create a virtual reverse relationship bw user-> task : Established a connection/relationship/mapping like in SQLDBs
+// create a virtual reverse relationship bw product-> inquiry : Established a connection/relationship/mapping
 
 productSchema.virtual( "inq", {  
     ref: "Inquiry",

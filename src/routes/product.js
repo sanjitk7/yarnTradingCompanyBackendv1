@@ -44,9 +44,9 @@ router.post("/", auth, upload.single("pPicture"), async (req, res) => {
     }
 })
 
-// GET /tasks?availability=true
-// GET /tasks?limit=2&skip=2
-// GET /tasks?sortBy=createdAt:asc
+// GET /products?availability=true
+// GET /products?limit=2&skip=2
+// GET /products?sortBy=createdAt:asc
 //View All Products
 router.get("/summary", async (req,res) => {
 
@@ -107,7 +107,6 @@ router.patch("/:code", auth, async (req,res) => {
         const foundProduct = await Product.findOne({pCode: req.params.code})
         updateFieldsReq.forEach((updateField) => foundProduct[updateField] = req.body[updateField])
 
-        // const updatedTask = await Product.findByIdAndUpdate(req.params.id,req.body,{ new: true, runValidators: true})
         if (!foundProduct){
             return res.status(404).send()
         }
