@@ -31,10 +31,33 @@ const inquirySchema = mongoose.Schema({
         type: String,
         required: true
     },
-    organisationAddr: {
+    organisationAddr:[ {
+        line1:{
         type: String,
         required: true
     },
+    lineOne:{
+        type: String,
+        required: true
+    },
+    lineTwo:{
+        type: String,
+        required: false
+    },
+    City:{
+        type: String,
+        required: true
+    },
+    State:{
+        type: String,
+        required: true
+    },
+    Pincode:{
+        type: String,
+        required: true 
+    }
+
+    }],
     estPurchaseSize: {
         type: Number,
         required: true,
