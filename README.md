@@ -25,7 +25,7 @@ An Inventory Management and Business Intelligence Web Application for a typical 
 #### Employee Routes
 
 1. Create Employee Account - POST */employee/create-employee*
-   1. Request Body: JSON with name,email,password,department, isAdmin, token, age
+   1. Request Body: JSON with name,email,password, isAdmin, token, age
    2. On Success: 201, {created newUser,token}
    3. On failure: 400
 

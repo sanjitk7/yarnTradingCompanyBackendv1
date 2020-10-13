@@ -1,4 +1,6 @@
 const express = require('express')
+const bodyParser = require('body-parser')
+const urlencodedParser = bodyParser.urlencoded({ extended:false})
 const Inquiry = require('../models/inquiry.js')
 const Product = require('../models/product')
 const {auth, adminAuth} = require("../middleware/auth.js")
@@ -9,7 +11,7 @@ const router = express.Router()
 
 //Create Inquiry
 
-router.post("/", async (req, res) => {
+router.post("/",urlencodedParser, async (req, res) => {
     const inquiry = new Inquiry(req.body)
     try {
         await inquiry.save()

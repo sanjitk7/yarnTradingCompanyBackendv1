@@ -12,7 +12,7 @@ router.get("/",(req,res) =>{
 })
 
 // Create Account
-router.post("/create-employee", async (req,res) => {
+router.post("/create-employee",urlencodedParser, async (req,res) => {
 
     const newUser = new Employee(req.body)
     try{

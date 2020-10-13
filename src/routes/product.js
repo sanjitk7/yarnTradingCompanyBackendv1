@@ -1,9 +1,10 @@
 const express = require('express');
 const multer = require('multer');
 const sharp = require('sharp');
+const bodyParser = require('body-parser')
 const Product = require('../models/product.js')
 const {auth, adminAuth} = require("../middleware/auth")
-
+const urlencodedParser = bodyParser.urlencoded({ extended:false})
 const router = express.Router()
 
 
@@ -23,7 +24,7 @@ const upload = multer({
 //CRUD Operations for Products by Employees
 
 //Create Products
-router.post("/", auth, upload.single("pPicture"), async (req, res) => {
+router.post("/",urlencodedParser, auth, upload.single("pPicture"), async (req, res) => {
     
     try {
         const buffer = await sharp(req.file.buffer).png().toBuffer()
