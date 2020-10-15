@@ -12,8 +12,19 @@ const router = express.Router()
 //Create Inquiry
 
 router.post("/",urlencodedParser, async (req, res) => {
-    const inquiry = new Inquiry(req.body)
+
     try {
+        const foundProductInquired = await Product.findOne({pCode:req.body.productInqCode})
+        // console.log("found product being inquired about"+foundProductInquired)
+
+        const inquiry = new Inquiry({
+            ...req.body,
+            productInqId:foundProductInquired._id
+        })
+
+        foundProductInquired.pInquiries.push(inquiry._id)
+        await foundProductInquired.save()
+
         await inquiry.save()
         res.status(201).send(inquiry)
     } catch (e) {
