@@ -62,7 +62,11 @@ const productSchema = mongoose.Schema({
     },
     pPictureURL:{
         type:String
-    }
+    },
+    pInquiries:[{
+        type: mongoose.Schema.Types.ObjectId,
+        ref:'Inquiry'
+    }]
 
 },{
     timestamps: true

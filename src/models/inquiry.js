@@ -32,8 +32,22 @@ const inquirySchema = mongoose.Schema({
         required: true
     },
     organisationAddr: {
-        type: String,
-        required: true
+        lineOne: {
+            type: String,
+            required: true
+        },
+        lineTwo:{
+            type: String
+        },
+        city:{
+            type: String
+        },
+        state:{
+            type: String
+        },
+        pincode:{
+            type:Number
+        }
     },
     estPurchaseSize: {
         type: Number,
@@ -44,7 +58,13 @@ const inquirySchema = mongoose.Schema({
             }
         }
     },
-    productsInq: [
+    // prodcutsInqCode:{
+    //     type:mongoose.Schema.Types.pCode,
+    //     required: True,
+    //     ref: 'Product'
+    // },
+
+    productInqId: 
         {
             type:mongoose.Schema.Types.ObjectId,
             required:true,
@@ -55,7 +75,7 @@ const inquirySchema = mongoose.Schema({
             //     }
             // }
         }
-    ],
+,
     remark: {
         type: String,
         validate(value){
