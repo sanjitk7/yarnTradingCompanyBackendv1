@@ -58,11 +58,11 @@ const inquirySchema = mongoose.Schema({
             }
         }
     },
-    // prodcutsInqCode:{
-    //     type:mongoose.Schema.Types.pCode,
-    //     required: True,
-    //     ref: 'Product'
-    // },
+    productInqCode:{
+        type:String,
+        required: true,
+        ref: 'Product'
+    },
 
     productInqId: 
         {
