@@ -7,8 +7,6 @@ const {auth, adminAuth} = require("../middleware/auth.js")
 
 const router = express.Router()
 
-
-
 //Create Inquiry
 
 router.post("/",urlencodedParser, async (req, res) => {
@@ -58,8 +56,20 @@ router.delete("/:id", auth, async (req,res) => {
         if (!deletedInquiry){
             return res.status(404).send()
         }
+        // Delete this inquiry's ID from the product's pInquiries list
+        const foundProductInquired = await Product.findOne({_id:deletedInquiry.productInqId})
+        // console.log("@@@@@",foundProductInquired.pInquiries)
+        foundProductInquired.pInquiries = foundProductInquired.pInquiries.filter((inquiryId)=>{
+            // console.log("$$$:",inquiryId,deletedInquiry._id)
+            const flag = inquiryId.toString() != deletedInquiry._id.toString()
+            // console.log("flag:",flag)
+            return inquiryId.toString() != deletedInquiry._id.toString()
+        })
+        // console.log(foundProductInquired.pInquiries)
+        await foundProductInquired.save()
         res.send(deletedInquiry)
     } catch (e) {
+        console.log(e)
         res.status(500).send()
     }
 })
