@@ -6,7 +6,7 @@ An Inventory Management and Business Intelligence Web Application for a typical 
 
 ### DataModel/ER Diagram
 
-![er](./public/img/backend-er.png)
+![er](./public/img/backend-er-v2.png)
 
 ### Backend API
 
@@ -53,7 +53,8 @@ An Inventory Management and Business Intelligence Web Application for a typical 
 ### Products Routes
 
 1. Create Product - POST */products*
-   1. Payload/request body JSON example - {
+   1. Payload/request body JSON example -
+    ```{
         "pCount": 30,
         "pAvailability": true,
         "pCode": "R0004",
@@ -63,6 +64,8 @@ An Inventory Management and Business Intelligence Web Application for a typical 
         "pDesc": "Purchased from Saraswathi Mills and Stock Updated on 12.12.12",
         "pPicture": *picture file*
     }
+    ```
+    1. pInquiries is a optional field that gets populated from the backend
     2. On Success - 200, product with pPictureURL attribute which contains corresponding picture get url
     3. On Failure - 400
 
@@ -102,16 +105,25 @@ An Inventory Management and Business Intelligence Web Application for a typical 
 ### Inquiries Routes
 
 1. Inquiry Creation (Public) - POST */inquiry*
-   1. Sample Payload/ req body - {
-    "inquirerName":"Sanjit",
-    "email": "example@example.com",
+   1. Sample Payload/ req body - 
+      
+   ```{
+    "inquirerName":"diff",
+    "email":"sanjit@thepc.com",
     "phoneNumber":"9842314733",
     "organisation":"Sun Yarns and Weavers",
-    "organisationAddr": "sample adress etc",
+    "organisationAddr": {
+        "lineOne":"Sample Address line 1",
+        "lineTwo":"Sample Address line 2",
+        "city":"Erode",
+        "state":"Tamil Nadu",
+        "pincode":638051
+    },
     "estPurchaseSize":300,
-    "productsInq": ["R0001","R0002"],
+    "productInqCode":"G0001",
     "remark":"Sample Text Lorem Ipsum Doleorem..."
 }
+   2. productInqId will get auto-populated based on the productInqCode
     2. Success - 201, inquiry
     3. Failure - 400
 
