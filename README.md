@@ -145,6 +145,24 @@ An Inventory Management and Business Intelligence Web Application for a typical 
    2. Success - 200, return list of inquiries associated with the given product ID
    3. Failure - 500
 
+### Visualisations
+
+1. Get number of inquiries received for each products - GET */visualisations/product-to-inquiry-count*
+   1. success - 200, list of objects with product id, pCode and inquiry count. Sample res
+   ```
+   [{
+        "pId": "5f895d15a64b5a7ac70302c5",
+        "pCode": "G0001",
+        "pInqNumber": 1
+    },
+    {
+        "pId": "5f8a89418d238618f4046e26",
+        "pCode": "B0002",
+        "pInqNumber": 3
+    }]
+   ```
+   2. failure - 500
+
 
 ### Deployment
 

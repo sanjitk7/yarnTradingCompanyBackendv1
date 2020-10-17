@@ -88,7 +88,7 @@ router.get("/:id/list-product", auth,adminAuth, async (req,res)=>{
     }
 })
 
-// List  product with the inquiries they have received
+// Return inquiries this product has received
 router.get("/:id/list-inquires",auth, adminAuth, async (req,res)=>{
     try {
         const foundProduct = await Product.findById(req.params.id)

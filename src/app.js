@@ -8,6 +8,7 @@ const cors = require("cors")
 const employeeRouter = require("./routes/employee.js")
 const productsRouter = require("./routes/product.js")
 const inquiryRouter = require("./routes/inquiry.js")
+const visualisationRouter = require("./routes/visualisations.js")
 
 // Disabling Cross Origin Resource sharing policy to enable frontend use
 const app = express()
@@ -27,6 +28,7 @@ app.use(express.json())
 app.use("/employee",employeeRouter)
 app.use("/products",productsRouter)
 app.use("/inquiry",inquiryRouter)
+app.use("/visualisations",visualisationRouter)
 
 module.exports = app
 
