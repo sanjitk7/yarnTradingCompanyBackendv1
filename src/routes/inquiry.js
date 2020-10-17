@@ -74,39 +74,34 @@ router.delete("/:id", auth, async (req,res) => {
     }
 })
 
-// List all products this inquiry inquires about
-router.get("/:id/list-products", auth,adminAuth, async (req,res)=>{
+// List  product this inquiry inquires about
+router.get("/:id/list-product", auth,adminAuth, async (req,res)=>{
     try {
 
         const foundInquiry = await Inquiry.findById(req.params.id)
-        await foundInquiry.
-        populate("productsInq").
-        execPopulate()
+        const foundInquiryProduct = await Product.findById(foundInquiry.productInqId)
 
-        res.send(foundInquiry)
+        res.send(foundInquiryProduct)
     } catch (e) {
         console.log(e)
         res.status(400).send({error:e})
     }
 })
 
-// List all inquires this product has received
+// List  product with the inquiries they have received
 router.get("/:id/list-inquires",auth, adminAuth, async (req,res)=>{
     try {
-        productId = req.params.id
-        let eachInquiryProducts = undefined
-        productInquiries = [] // the inquires received about the given product (product id in params)
-        const allInquiries = await Inquiry.find({})
-        for (let i=0;i<allInquiries.length;i++) {
-            eachInquiryProducts = allInquiries[i].productsInq
-            if (eachInquiryProducts.includes(productId)){
-                productInquiries.push(allInquiries[i])
-            }
-        }
-
-        res.send(productInquiries)
+        const foundProduct = await Product.findById(req.params.id)
+        console.log(foundProduct)
+        await foundProduct.
+        populate("pInquiries").
+        execPopulate()
+        res.send(foundProduct.pInquiries)
     } catch (e) {
         console.log(e)
     }
 })
+
+
+
 module.exports = router
