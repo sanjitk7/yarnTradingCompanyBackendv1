@@ -165,7 +165,7 @@ An Inventory Management and Business Intelligence Web Application for a typical 
    ```
    2. failure - 500
 
-   2. Get number of inquiries received from different regions - GET */visualisations/state-to-inquiries*
+   2. Get number of inquiries received from different regions - GET */visualisations/state-to-inquiries-bar*
       1. success - 200, list of objects with region, inquiry count. Sample res
       ```
       [{
@@ -186,26 +186,48 @@ An Inventory Management and Business Intelligence Web Application for a typical 
       }]
       ```
       2. failure - 500
-
-   3. Get average purchase size - GET */visualisations/avg-pdt-purchase-size*
-      1. success - 200, list of objects with pCode, inquiry count. Sample res
+   
+   3. Get number of inquiries received from different regions - GET */visualisations/state-to-inquiries-pie*
+      1. success - 200, list of objects with region, inquiry count. Sample res
       ```
       [{
-        "x": "G0001",
-        "y": 200
+        "label": "Tamil Nadu",
+        "angle": 2
+         },
+      {
+        "label": "Karnataka",
+        "angle": 1
+      },
+      { 
+        "label": "Kerala",
+        "angle": 1
       },
       {
-        "x": "B0002",
-        "y": 100
-      },
-      {
-        "x": "L0006",
-        "y": 0
+        "label": "West Bengal",
+        "angle": 1
       }]
       ```
       2. failure - 500
 
-      4. Get Number of inquiries per Yarn Count Variety - GET */visualisations/count-to-inquiries*
+   4. Get average purchase size - GET */visualisations/avg-pdt-purchase-size*
+      1. success - 200, list of objects with pCode, inquiry count. Sample res
+      ```
+      [{
+        "y": "G0001",
+        "x": 200
+      },
+      {
+        "y": "B0002",
+        "x": 100
+      },
+      {
+        "y": "L0006",
+        "x": 0
+      }]
+      ```
+      2. failure - 500
+
+      5. Get Number of inquiries per Yarn Count Variety - GET */visualisations/count-to-inquiries*
       1. success - 200, list of objects with pCount (yarnCount i.e thickness), inquiry count. Sample res
       ```
       [{

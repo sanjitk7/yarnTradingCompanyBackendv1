@@ -102,6 +102,4 @@ router.get("/:id/list-inquires",auth, adminAuth, async (req,res)=>{
     }
 })
 
-
-
 module.exports = router
