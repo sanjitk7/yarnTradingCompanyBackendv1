@@ -131,12 +131,39 @@ router.get("/avg-pdt-purchase-size", async (req,res)=>{
 
 // // Yarn Count Vs Yarn Inquiries
 
-// router.get("/count-to-inquiries", async (req, res) => {
-//     try {
-//         const 
-//     } catch (e){
+router.get("/count-to-inquiries", async (req, res) => {
+    try {
+        const allProducts = await Product.find({},"pInquiries pCount pCode")
 
-//     }
-// })
+        countObj = {}
+        for (let i=0; i<allProducts.length; i++) {
+            if (!Object.keys(countObj).includes(allProducts[i].pCount.toString())){
+                // console.log(allProducts[i].pCount)
+                countObj = {
+                    ...countObj,
+                    [allProducts[i].pCount]:allProducts[i].pInquiries.length
+                }
+                console.log(countObj,allProducts[i].pCode)
+            }
+            else {
+                console.log("pCount " +allProducts[i].pCount+" already exists so incrementing obj")
+                countObj[allProducts[i].pCount] = allProducts[i].pInquiries.length + 1
+            }
+        }
+
+        // create list of objects for data vis lib format
+        let resArr = []
+        Object.keys(countObj).forEach(function(key,index) {
+            resArr.push({
+                x:key,
+                y:countObj[key]
+            })
+        })
+        res.send(resArr)
+    } catch (e){
+        console.log(e)
+        res.status(500).send("Error Encountered")
+    }
+})
 
 module.exports = router

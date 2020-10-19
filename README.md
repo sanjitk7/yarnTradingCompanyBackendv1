@@ -204,6 +204,24 @@ An Inventory Management and Business Intelligence Web Application for a typical 
       }]
       ```
       2. failure - 500
+
+      4. Get Number of inquiries per Yarn Count Variety - GET */visualisations/count-to-inquiries*
+      1. success - 200, list of objects with pCount (yarnCount i.e thickness), inquiry count. Sample res
+      ```
+      [{
+        "x": "10",
+        "y": 3
+      },
+      {
+        "x": "18",
+         "y": 2
+      },
+      {
+        "x": "30",
+        "y": 2
+      }]
+      ```
+      2. failure - 500
       
 
 ### Deployment
