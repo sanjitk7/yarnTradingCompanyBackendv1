@@ -100,4 +100,43 @@ router.get("/state-to-inquiries", async (req,res)=>{
     }
 })
 
+
+// Average Product Purchase size
+
+router.get("/avg-pdt-purchase-size", async (req,res)=>{
+    try{
+        const allProducts = await Product.find({},"pInquiries pCode")
+        let resArr = []
+        for (let i=0; i<allProducts.length;i++){
+            console.log("Product:",allProducts[i].pCode)
+            let sum = 0 // Sum of all product inquiry purchase est sizes
+            for (let j=0; j<allProducts[i].pInquiries.length;j++){
+                let tempInquiryId = allProducts[i].pInquiries[j]
+                let tempInquiryObject = await Inquiry.findById(tempInquiryId,"estPurchaseSize")
+                sum +=tempInquiryObject.estPurchaseSize
+                // console.log("sum:",sum)
+            }
+            resArr.push({
+                x:allProducts[i].pCode,
+                y: sum/(allProducts[i].pInquiries.length || 1)
+            })
+        }
+        res.send(resArr)
+    } catch (e) {
+        console.log(e)
+        res.status(500).send("Error Encountered")
+    }
+})
+
+
+// // Yarn Count Vs Yarn Inquiries
+
+// router.get("/count-to-inquiries", async (req, res) => {
+//     try {
+//         const 
+//     } catch (e){
+
+//     }
+// })
+
 module.exports = router

@@ -151,18 +151,60 @@ An Inventory Management and Business Intelligence Web Application for a typical 
    1. success - 200, list of objects with product id, pCode and inquiry count. Sample res
    ```
    [{
-        "pId": "5f895d15a64b5a7ac70302c5",
-        "pCode": "G0001",
-        "pInqNumber": 1
+        "x": "G0001",
+        "y": 2
     },
     {
-        "pId": "5f8a89418d238618f4046e26",
-        "pCode": "B0002",
-        "pInqNumber": 3
+        "x": "B0002",
+        "y": 3
+    },
+    {
+        "x": "L0006",
+        "y": 0
     }]
    ```
    2. failure - 500
 
+   2. Get number of inquiries received from different regions - GET */visualisations/state-to-inquiries*
+      1. success - 200, list of objects with region, inquiry count. Sample res
+      ```
+      [{
+        "x": "Tamil Nadu",
+        "y": 2
+         },
+      {
+        "x": "Karnataka",
+        "y": 1
+      },
+      { 
+        "x": "Kerala",
+        "y": 1
+      },
+      {
+        "x": "West Bengal",
+        "y": 1
+      }]
+      ```
+      2. failure - 500
+
+   3. Get average purchase size - GET */visualisations/avg-pdt-purchase-size*
+      1. success - 200, list of objects with pCode, inquiry count. Sample res
+      ```
+      [{
+        "x": "G0001",
+        "y": 200
+      },
+      {
+        "x": "B0002",
+        "y": 100
+      },
+      {
+        "x": "L0006",
+        "y": 0
+      }]
+      ```
+      2. failure - 500
+      
 
 ### Deployment
 
