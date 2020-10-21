@@ -27,7 +27,7 @@ const upload = multer({
 router.post("/",urlencodedParser, auth, upload.single("pPicture"), async (req, res) => {
     
     try {
-        const buffer = await sharp(req.file.buffer).png().toBuffer()
+        const buffer = await sharp(req.file.buffer).resize({ height: 250, width: 250}).png().toBuffer()
         
         // const product = new Product(req.body)
         console.log(req.body)
