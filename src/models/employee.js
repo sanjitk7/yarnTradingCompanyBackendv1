@@ -31,7 +31,7 @@ const employeeSchema = mongoose.Schema({
         default:0,
         validate(value){
             if (value<0){
-                throw new Error("Age cannot be negetive")
+                throw new Error("Age cannot be negative")
             }
         }
 

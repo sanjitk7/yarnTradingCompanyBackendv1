@@ -26,7 +26,7 @@ router.post("/",urlencodedParser, async (req, res) => {
         await inquiry.save()
         res.status(201).send(inquiry)
     } catch (e) {
-
+        console.log(e)
         res.status(400).send(e)
     }
 })

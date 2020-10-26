@@ -37,7 +37,17 @@ const inquiryOne = {
     phoneNumber:"123456789",
     organisation: "Sun Yarns Retail",
     organisationAddr: "56, Cholan Street, Chennimalai",
-    estPuchaseSize: 100,
+    estPurchaseSize: 100,
+    productInqId: productOneId,
+    productInqCode:"R0004",
+    estPurchaseSize:200,
+    organisationAddr: {
+        lineOne: "Sample Address 1",
+        lineTwo: "Sample Address 2",
+        city: "Bangalore",
+        state:"Karnataka",
+        pincode:638051
+    },
     remark: "Interested in the R001 Red Color 20s Count Yarn"
 }
 
@@ -47,8 +57,17 @@ const inquiryTwo = {
     email: "jane@example.com",
     phoneNumber:"987654321",
     organisation: "Moon Yarns Retail",
-    organisationAddr: "56, Cheran Street, Erode",
-    estPuchaseSize: 100,
+    organisationAddr: {
+        lineOne: "Sample Address 1",
+        lineTwo: "Sample Address 2",
+        city: "Erode",
+        state:"Tamil Nadu",
+        pincode:638051
+    },
+    estPurchaseSize: 100,
+    productInqId: productTwoId,
+    productInqCode:"R0002",
+    estPurchaseSize:100,
     remark: "Interested in the R002 Navy Blue Color 20s Count Yarn"
 }
 

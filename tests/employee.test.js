@@ -13,7 +13,8 @@ test("create employee account", async ()=>{
         name:"Test User",
         email:"Test1@example.com",
         age: 20,
-        password:"Hello12344"
+        password:"Hello12344",
+
     }).expect(201)
 
     // Assert DB Update
@@ -42,7 +43,7 @@ test("login employee", async ()=>{
     expect(response.body.token).toBe(foundEmployee.tokens[1].token)
 })
 
-test("login employee fail with non-existant employee", async ()=>{
+test("login employee fail with non-existent employee", async ()=>{
     await request(app).post("/employee/login").send({
         email: "emaildoesntexist@doestexistland.com",
         password:"randomstring"
@@ -79,7 +80,7 @@ test("Should delete employee only by admin", async () => {
 test("Should not delete user for invalid auth", async () => {
     const invalidToken = "hbraehbfahsbg"
     await request(app)
-        .delete('/users/me')
+        .delete(`/employee/${employeeOneId}`)
         .set('Authorization', `Bearer ${invalidToken}`)
         .send()
         .expect(401)
