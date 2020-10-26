@@ -27,18 +27,27 @@ const upload = multer({
 router.post("/",urlencodedParser, auth, upload.single("pPicture"), async (req, res) => {
     
     try {
-        const buffer = await sharp(req.file.buffer).resize({ height: 250, width: 250}).png().toBuffer()
         
         // const product = new Product(req.body)
         console.log(req.body)
-        const product = new Product({
-            ...req.body,
-            pPicture: buffer,
-            pPictureURL: "http://127.0.0.1:4000/products/picture/" + req.body.pCode
-        })
 
-        await product.save()
-        res.status(201).send(product)
+        if (!req.file){
+            const product = new Product({
+                ...req.body
+            })
+            await product.save()
+            return res.status(201).send(product)
+        }
+
+            const buffer = await sharp(req.file.buffer).resize({ height: 250, width: 250}).png().toBuffer()
+            const product = new Product({
+                ...req.body,
+                pPicture: buffer,
+                pPictureURL: "http://127.0.0.1:4000/products/picture/" + req.body.pCode
+            })
+            await product.save()
+            res.status(201).send(product)
+        
     } catch (e) {
         console.log(e)
         res.status(400).send()
