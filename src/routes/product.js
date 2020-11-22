@@ -43,7 +43,7 @@ router.post("/",urlencodedParser, auth, upload.single("pPicture"), async (req, r
             const product = new Product({
                 ...req.body,
                 pPicture: buffer,
-                pPictureURL: "http://127.0.0.1:4000/products/picture/" + req.body.pCode
+                pPictureURL: `${process.env.API_BASE_URL}/products/picture/` + req.body.pCode
             })
             await product.save()
             res.status(201).send(product)
@@ -103,17 +103,21 @@ router.get("/:code", async (req,res) => {
 })
 
 // Updating Existing Products
-router.patch("/:code", auth, async (req,res) => {
-    const pid = req.params.id
+router.patch("/:code",urlencodedParser, auth, async (req,res) => {
+    console.log("Update Route is HIT")
+    const pid = req.params.code
     const updateFieldsReq = Object.keys(req.body)
     const validFields = ["pCount", "pAvailability", "pPriceEst", "pDesc"]
     const isValidateFields = updateFieldsReq.every( (field) => validFields.includes(field))
 
     if (!isValidateFields){
+        console.log(req.body)
+        console.log("valid fields are", validFields)
         return res.status(400).send({ "error":"Invalid Update Requested"})
     }
 
     try{
+        console.log(req.body)
         const foundProduct = await Product.findOne({pCode: req.params.code})
         updateFieldsReq.forEach((updateField) => foundProduct[updateField] = req.body[updateField])
 
@@ -122,6 +126,8 @@ router.patch("/:code", auth, async (req,res) => {
         }
                 
         await foundProduct.save()
+        console.log("Updated "+foundProduct.pCode)
+        console.log("Requested Update:",req.body)
         res.send(foundProduct)
     } catch (e) {
         console.log(e)
