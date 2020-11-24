@@ -249,4 +249,6 @@ An Inventory Management and Business Intelligence Web Application for a typical 
 ### Deployment
 
 Backend Server Deployed in a [Heroku Server](https://sanjit-yarn-trading-backend.herokuapp.com) and Mongo Atlas Cluster.
-Find front end repository [here](https://github.com/sanjitk7/yarnTradingCompanyFrontendv1)
+
+For instructions to run locally and more detailed documentation visit the frontend repository
+[here](https://github.com/sanjitk7/yarnTradingCompanyFrontendv2)
